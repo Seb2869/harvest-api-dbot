@@ -85,7 +85,13 @@ const stopApiCheck = () => {
 
 
 client.on("ready", () => {
-    console.log("Harvest Api check bot is ready")
+	console.log("Harvest Api check bot is ready")
+	const channel = client.channels.cache.get(process.env.CHANNEL_ID)
+    if (channel) {
+        startApiCheck(channel)
+    } else {
+        console.log("Channel not found")
+    }
 })
 
 client.on("message", msg => {
